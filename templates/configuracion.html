@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Configuración - InfoSys Challenge</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='general.css') }}">
+</head>
+<body>
+	<div id="pantalla">
+		<div id="barraOpTel"></div>
+		<div id="contenido" style="display: flex; flex-direction: column; height: 100%; position: relative;">
+			<div id="op">
+				<a href="{{ url_for('index') }}">Inicio</a>
+				<a href="{{ url_for('profile') }}">Perfil</a>
+				<a href="{{ url_for('configuracion') }}" class="active">Configuración</a>
+			</div>
+
+			<main style="padding: 24px; color: #000; font-family: sans-serif;">
+				<h1>Configuración</h1>
+				<p>Administra las preferencias de tu cuenta.</p>
+			</main>
+		</div>
+	</div>
+</body>
+</html>

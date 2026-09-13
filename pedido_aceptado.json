@@ -1,0 +1,18 @@
+{
+    "pedido_id": 123,
+    "repartidor": {
+        "lat": 25.696841,
+        "lng": -100.335769,
+        "calle": "Calle Artículo 123"
+    },
+    "recogida": {
+        "lat": 25.6866,
+        "lng": -100.3161,
+        "calle": "Colón"
+    },
+    "destino": {
+        "lat": 25.7,
+        "lng": -100.29,
+        "calle": "Calle Libertad"
+    }
+}

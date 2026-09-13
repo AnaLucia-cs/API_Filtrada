@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>InfoSys Challenge</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='general.css') }}">
+
+    <!-- MAPLIBRE -->
+    <link
+        href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css"
+        rel="stylesheet"
+    >
+
+</head>
+
+<body>
+
+<div id="condiciones">
+
+    <div
+        id="choque"
+        class="condicion"
+        data-tipo="choque"
+        data-emoji="🚨"
+    >
+        🚨 Choque
+    </div>
+
+    <div
+        id="obras"
+        class="condicion"
+        data-tipo="obras"
+        data-emoji="🚧"
+    >
+        🚧 Obras
+    </div>
+
+    <div
+        id="inundación"
+        class="condicion"
+        data-tipo="inundacion"
+        data-emoji="🌊"
+    >
+        🌊 Inundación
+    </div>
+
+    <div
+        id="trafico"
+        class="condicion"
+        data-tipo="trafico"
+        data-emoji="🚗"
+    >
+        🚗 Tráfico
+    </div>
+
+</div>
+
+
+
+    <div id="pantalla">
+
+        <div id="barraOpTel"></div>
+
+        <div id="contenido">
+
+            <div id="op">
+                            <a href="{{ url_for('index') }}">Inicio</a>
+                            <a href="{{ url_for('profile') }}">Perfil</a>
+                            <a href="{{ url_for('configuracion') }}">Configuración</a>
+            </div>
+
+            <div id="map">
+               
+                <div id="display-message">
+                </div>    
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MAPLIBRE -->
+    <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
+
+    <!-- TU JS -->
+    <script src="{{ url_for('static', filename='js.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Perfil - InfoSys Challenge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static\general.css">
+    <!-- FontAwesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <!-- Chart.js para la gráfica dinámica -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div id="pantalla">
+        <div id="barraOpTel"></div>
+
+        <div id="contenido" style="display: flex; flex-direction: column; height: 100%; position: relative;">
+
+            <!-- Menú Superior de Navegación -->
+            <div id="op">
+                <a href="{{ url_for('index') }}">Inicio</a>
+                <a href="{{ url_for('profile') }}" class="active">Perfil</a>
+                <a href="{{ url_for('configuracion') }}">Configuración</a>
+            </div>
+
+            <!-- CONTENIDO DE PERFIL -->
+            <div id="profile-container" style="padding: 12px; display: flex; flex-direction: column; flex: 1; color: #000; font-family: sans-serif; box-sizing: border-box; overflow: hidden;">
+                
+                <!-- 1. FOTO, INFORMACIÓN PERSONAL Y BOTÓN EDITAR -->
+                <div class="profile-personal" style="display: flex; align-items: center; gap: 12px; background: #fff; padding: 10px; border-radius: 14px; margin-bottom: 10px; border: 1px solid #e5e7eb; flex-shrink: 0;">
+                    <div style="text-align: center;">
+                        <div id="avatar-box" style="width: 50px; height: 50px; border-radius: 50%; background-color: #3b82f6; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; margin: 0 auto 2px auto; transition: all 0.3s; overflow: hidden;">
+                            <img id="avatar-image" alt="Foto de perfil" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+                            <i id="avatar-icon" class="fa-solid fa-user"></i>
+                        </div>
+                        <button onclick="toggleMenuEditar()" style="background: none; border: none; color: #2563eb; font-weight: bold; font-size: 0.72rem; cursor: pointer; text-decoration: underline; padding: 0;">
+                            editar
+                        </button>
+                    </div>
+
+                    <div style="flex: 1;">
+                        <h3 style="margin: 0 0 2px 0; font-size: 0.95rem; color: #111827;">Información Personal</h3>
+                        <p style="margin: 1px 0; font-size: 0.78rem; color: #4b5563;"><strong id="disp-nombre">Juan Pérez</strong></p>
+                        <p style="margin: 1px 0; font-size: 0.78rem; color: #4b5563;">Edad: <span id="disp-edad">25</span> años</p>
+                        <p style="margin: 1px 0; font-size: 0.78rem; color: #4b5563;">Género: <span id="disp-genero">Masculino</span></p>
+                    </div>
+                </div>
+
+                <!-- 2. VEHÍCULO EN USO (DINÁMICO) -->
+                <div style="background: #fff; padding: 8px 12px; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #e5e7eb; flex-shrink: 0;">
+                    <span style="font-size: 0.8rem; font-weight: bold; color: #374151;">Vehículo en uso:</span>
+                    <div id="vehiculo-icono" style="font-size: 1.3rem; color: #1f2937;">
+                        <i class="fa-solid fa-car" title="Automóvil"></i>
+                    </div>
+                </div>
+
+                <!-- 3. PANEL PRINCIPAL: CHARTS QUE SE EXTIENDEN HASTA EL FINAL -->
+                <div style="display: flex; gap: 10px; flex: 1; min-height: 0;">
+                    
+                    <!-- Columna Izquierda: Métricas -->
+                    <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 6px; width: 42%;">
+                        
+                        <!-- Total $ -->
+                        <div style="background: #fff; padding: 8px; border-radius: 10px; border: 1px solid #e5e7eb; flex: 1; display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.7rem; font-weight: bold;">Total $</span>
+                                <select onchange="actualizarFiltro('total', this.value)" style="font-size: 0.65rem; border: 1px solid #ccc; border-radius: 4px; padding: 1px;">
+                                    <option value="semana">Semana</option>
+                                    <option value="dia">Día</option>
+                                </select>
+                            </div>
+                            <p id="val-total" style="margin: 4px 0 0 0; font-size: 0.85rem; font-weight: bold; color: #10b981;">$1,450</p>
+                        </div>
+
+                        <!-- Gasolina -->
+                        <div style="background: #fff; padding: 8px; border-radius: 10px; border: 1px solid #e5e7eb; flex: 1; display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.7rem; font-weight: bold;">Gasolina</span>
+                                <select onchange="actualizarFiltro('gasolina', this.value)" style="font-size: 0.65rem; border: 1px solid #ccc; border-radius: 4px; padding: 1px;">
+                                    <option value="semana">Semana</option>
+                                    <option value="dia">Día</option>
+                                </select>
+                            </div>
+                            <p id="val-gasolina" style="margin: 4px 0 0 0; font-size: 0.85rem; font-weight: bold; color: #ef4444;">-$320</p>
+                        </div>
+
+                        <!-- Pedidos -->
+                        <div style="background: #fff; padding: 8px; border-radius: 10px; border: 1px solid #e5e7eb; flex: 1; display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.7rem; font-weight: bold;">Pedidos</span>
+                                <select onchange="actualizarFiltro('pedidos', this.value)" style="font-size: 0.65rem; border: 1px solid #ccc; border-radius: 4px; padding: 1px;">
+                                    <option value="semana">Semana</option>
+                                    <option value="dia">Día</option>
+                                </select>
+                            </div>
+                            <p id="val-pedidos" style="margin: 4px 0 0 0; font-size: 0.85rem; font-weight: bold; color: #2563eb;">24 ent.</p>
+                        </div>
+
+                        <!-- Ganancia: total menos gasolina -->
+                        <div style="background: #fff; padding: 8px; border-radius: 10px; border: 1px solid #e5e7eb; flex: 1; display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+                            <span style="font-size: 0.7rem; font-weight: bold;">Ganancia</span>
+                            <p id="val-ganancia" style="margin: 4px 0 0 0; font-size: 0.85rem; font-weight: bold; color: #8b5cf6;">$1,130</p>
+                        </div>
+
+                    </div>
+
+                    <!-- Columna Derecha: Gráfica Completa -->
+                    <div style="background: #fff; padding: 8px; border-radius: 12px; border: 1px solid #e5e7eb; width: 58%; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div style="flex: 5; width: 100%; min-height: 0; position: relative;">
+                            <canvas id="chartResumen"></canvas>
+                        </div>
+                        <div style="margin-top: 4px; border-top: 1px solid #f3f4f6; padding-top: 4px; flex-shrink: 0;">
+                            <span style="font-size: 0.65rem; color: #6b7280; display: block;" id="titulo-resumen">Total de la semana:</span>
+                            <span style="font-size: 0.85rem; font-weight: bold; color: #111827;" id="monto-resumen">$1,130 MXN</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- MENÚ / MODAL VISIBLE PARA EDITAR DATOS DEL PERFIL           -->
+            <!-- ============================================================ -->
+            <div id="modal-editar" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 100; align-items: center; justify-content: center;">
+                <div style="background: #fff; width: 85%; max-width: 280px; padding: 16px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); font-family: sans-serif;">
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h4 style="margin: 0; font-size: 0.95rem; color: #111827;">Editar Información</h4>
+                        <button onclick="toggleMenuEditar()" style="background: none; border: none; font-size: 1.1rem; cursor: pointer; color: #6b7280;">&times;</button>
+                    </div>
+
+                    <!-- Campo Nombre -->
+                    <div style="margin-bottom: 8px;">
+                        <label style="display: block; font-size: 0.7rem; font-weight: bold; color: #374151; margin-bottom: 2px;">Nombre:</label>
+                        <input type="text" id="input-nombre" style="width: 100%; padding: 6px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.8rem; box-sizing: border-box;" />
+                    </div>
+
+                    <!-- Campo Edad -->
+                    <div style="margin-bottom: 8px;">
+                        <label style="display: block; font-size: 0.7rem; font-weight: bold; color: #374151; margin-bottom: 2px;">Edad:</label>
+                        <input type="number" id="input-edad" style="width: 100%; padding: 6px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.8rem; box-sizing: border-box;" />
+                    </div>
+
+                    <!-- Campo Género -->
+                    <div style="margin-bottom: 8px;">
+                        <label style="display: block; font-size: 0.7rem; font-weight: bold; color: #374151; margin-bottom: 2px;">Género:</label>
+                        <select id="input-genero" style="width: 100%; padding: 6px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.8rem; box-sizing: border-box;">
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <!-- Foto de perfil -->
+                    <div style="margin-bottom: 12px;">
+                        <label for="input-avatar-photo" style="display: block; font-size: 0.7rem; font-weight: bold; color: #374151; margin-bottom: 2px;">Foto de perfil:</label>
+                        <input type="file" id="input-avatar-photo" accept="image/*" style="width: 100%; padding: 6px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.8rem; box-sizing: border-box;">
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px;">
+                        <button onclick="toggleMenuEditar()" style="padding: 6px 12px; border: 1px solid #d1d5db; background: #f3f4f6; border-radius: 6px; font-size: 0.75rem; cursor: pointer;">Cancelar</button>
+                        <button onclick="guardarPerfil()" style="padding: 6px 12px; border: none; background: #2563eb; color: white; border-radius: 6px; font-size: 0.75rem; font-weight: bold; cursor: pointer;">Guardar</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SCRIPT DE INTERACTIVIDAD -->
+    <script>
+        const avatarBox = document.getElementById('avatar-box');
+        const avatarImage = document.getElementById('avatar-image');
+        const avatarIcon = document.getElementById('avatar-icon');
+        const avatarPhotoInput = document.getElementById('input-avatar-photo');
+
+        function mostrarFotoAvatar(src) {
+            avatarImage.src = src;
+            avatarImage.style.display = 'block';
+            avatarIcon.style.display = 'none';
+            avatarBox.style.backgroundColor = 'transparent';
+        }
+
+        avatarPhotoInput.addEventListener('change', function () {
+            const archivo = this.files[0];
+            if (!archivo) return;
+
+            const lector = new FileReader();
+            lector.onload = function (evento) {
+                mostrarFotoAvatar(evento.target.result);
+            };
+            lector.readAsDataURL(archivo);
+        });
+
+        const fotoGuardada = localStorage.getItem('fotoPerfil');
+        if (fotoGuardada) mostrarFotoAvatar(fotoGuardada);
+
+        // Abrir / Cerrar Menú de Edición
+        function toggleMenuEditar() {
+            const modal = document.getElementById('modal-editar');
+            if (modal.style.display === 'none' || modal.style.display === '') {
+                // Cargar valores actuales en las cajas de texto
+                document.getElementById('input-nombre').value = document.getElementById('disp-nombre').innerText;
+                document.getElementById('input-edad').value = document.getElementById('disp-edad').innerText;
+                document.getElementById('input-genero').value = document.getElementById('disp-genero').innerText;
+                modal.style.display = 'flex';
+            } else {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Guardar cambios introducidos en el menú
+        function guardarPerfil() {
+            const nuevoNombre = document.getElementById('input-nombre').value;
+            const nuevaEdad = document.getElementById('input-edad').value;
+            const nuevoGenero = document.getElementById('input-genero').value;
+
+            if (nuevoNombre) document.getElementById('disp-nombre').innerText = nuevoNombre;
+            if (nuevaEdad) document.getElementById('disp-edad').innerText = nuevaEdad;
+            if (nuevoGenero) document.getElementById('disp-genero').innerText = nuevoGenero;
+
+            if (avatarImage.src && avatarImage.style.display !== 'none') {
+                localStorage.setItem('fotoPerfil', avatarImage.src);
+            }
+
+            toggleMenuEditar();
+        }
+
+        // Gráfica con Chart.js
+        const ctx = document.getElementById('chartResumen').getContext('2d');
+        const chartResumen = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['L', 'M', 'M', 'J', 'V', 'S'],
+                datasets: [
+                    {
+                        label: 'Ganado',
+                        data: [200, 400, 300, 550, 450, 700],
+                        borderColor: '#10b981',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        pointRadius: 2
+                    },
+                    {
+                        label: 'Gastado',
+                        data: [50, 80, 40, 100, 60, 90],
+                        borderColor: '#ef4444',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        pointRadius: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { display: false }, ticks: { font: { size: 9 } } },
+                    y: { display: false }
+                }
+            }
+        });
+
+        function actualizarGanancia() {
+            const total = Number(document.getElementById('val-total').innerText.replace(/[$,]/g, ''));
+            const gasolina = Number(document.getElementById('val-gasolina').innerText.replace(/[$,]/g, ''));
+            const ganancia = total - Math.abs(gasolina);
+
+            document.getElementById('val-ganancia').innerText = `$${ganancia.toLocaleString('en-US')}`;
+        }
+
+        // Cambiar valores al alternar Día / Semana
+        function actualizarFiltro(tipo, valor) {
+            if (tipo === 'total') {
+                document.getElementById('val-total').innerText = valor === 'dia' ? '$350' : '$1,450';
+            } else if (tipo === 'gasolina') {
+                document.getElementById('val-gasolina').innerText = valor === 'dia' ? '-$80' : '-$320';
+            } else if (tipo === 'pedidos') {
+                document.getElementById('val-pedidos').innerText = valor === 'dia' ? '6 ent.' : '24 ent.';
+            }
+
+            actualizarGanancia();
+        }
+    </script>
+
+</body>
+</html>
