@@ -1,9 +1,9 @@
 {
     "pedido_id": 123,
     "repartidor": {
-        "lat": 25.696841,
-        "lng": -100.335769,
-        "calle": "Calle Artículo 123"
+        "lat": 25.709107,
+        "lng": -100.316884,
+        "calle": "Manuel L. Barragán"
     },
     "recogida": {
         "lat": 25.6866,

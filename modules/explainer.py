@@ -1,6 +1,6 @@
 import os
 import json
-from google import genai
+from google import generativeai as genai
 from dotenv import load_dotenv
 
 # Cargar variables de entorno
@@ -11,7 +11,7 @@ if not api_key:
     raise ValueError("No se encontró GEMINI_API_KEY en el archivo .env")
 
 # Crear cliente de Gemini
-client = genai.Client(api_key=api_key)
+client = genai.configure(api_key=api_key)
 
 def analizar_y_explicar(distancia_km, tarifa_mxn, trafico):
     prompt = f"""

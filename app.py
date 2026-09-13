@@ -5,6 +5,9 @@ import os
 import requests
 import threading
 from datetime import datetime
+from modules.explainer import analizar_y_explicar
+from modules.database import init_db, guardar_pedido
+
 
 app = Flask(__name__)
 # =========================================================

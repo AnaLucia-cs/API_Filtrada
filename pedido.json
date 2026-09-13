@@ -151,5 +151,41 @@
         "lng": -100.294964,
         "calle": "Avenida Félix Uresti Gómez",
         "fecha": "2026-09-12T20:26:27.991345"
+    },
+    {
+        "id": 1789267323823,
+        "tipo": "choque",
+        "emoji": "🚨",
+        "lat": 25.703134,
+        "lng": -100.316261,
+        "calle": "Avenida Alfonso Reyes",
+        "fecha": "2026-09-12T20:42:03.823403"
+    },
+    {
+        "id": 1789267335138,
+        "tipo": "obras",
+        "emoji": "🚧",
+        "lat": 25.702731,
+        "lng": -100.301485,
+        "calle": "Avenida José Ángel Conchello",
+        "fecha": "2026-09-12T20:42:15.138648"
+    },
+    {
+        "id": 1789267338036,
+        "tipo": "inundacion",
+        "emoji": "🌊",
+        "lat": 25.695838,
+        "lng": -100.310767,
+        "calle": "Avenida Vicente Guerrero",
+        "fecha": "2026-09-12T20:42:18.036466"
+    },
+    {
+        "id": 1789267344047,
+        "tipo": "trafico",
+        "emoji": "🚗",
+        "lat": 25.694238,
+        "lng": -100.287396,
+        "calle": "Calle Pablo A. de la Garza",
+        "fecha": "2026-09-12T20:42:24.047105"
     }
 ]
