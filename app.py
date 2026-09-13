@@ -610,6 +610,7 @@ def obtener_pedido_aceptado():
 if __name__ == "__main__":
     # Cargar las condiciones que ya existían
     # en pedido.json al arrancar Flask.
+    app.run(host='0.0.0.0', port=5000, debug=True)
     cargar_condiciones()
     app.run(
         debug=True
