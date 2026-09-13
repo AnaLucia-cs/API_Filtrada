@@ -160,5 +160,23 @@
         "lng": -100.376231,
         "calle": "Calle no disponible",
         "fecha": "2026-09-13T03:29:49.419695"
+    },
+    {
+        "id": 1789296441775,
+        "tipo": "obras",
+        "emoji": "🚧",
+        "lat": 25.704384,
+        "lng": -100.319531,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T04:47:21.775375"
+    },
+    {
+        "id": 1789296452763,
+        "tipo": "inundacion",
+        "emoji": "🌊",
+        "lat": 25.703732,
+        "lng": -100.326476,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T04:47:32.763912"
     }
 ]

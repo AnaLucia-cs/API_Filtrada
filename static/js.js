@@ -174,6 +174,43 @@ function limpiarPedidos() {
 // Esta función solamente se llama después de seleccionar
 // al conductor.
 
+// =========================================================
+// MOSTRAR GANANCIA DEL PEDIDO ACEPTADO
+// =========================================================
+
+function mostrarGanancia(pedido) {
+
+    const monto = document.getElementById(
+        "ganancias-monto"
+    );
+
+    const detalle = document.getElementById(
+        "ganancias-detalle"
+    );
+
+    if (!monto || !detalle) {
+
+        console.error(
+            "No se encontró el recuadro de ganancias."
+        );
+
+        return;
+    }
+
+    const tarifa = Number(pedido.tarifa) || 0;
+
+    monto.textContent =
+        `+$${tarifa.toFixed(2)} MXN`;
+
+    detalle.textContent =
+        `Ganancia por aceptar el pedido ${pedido.id}.`;
+
+    console.log(
+        "Ganancia mostrada:",
+        tarifa
+    );
+}
+
 async function cargarPedidosEnMapa() {
 
     if (!ubicacionRepartidor) {
@@ -915,23 +952,25 @@ async function aceptarPedido(pedidoAceptado) {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    pedido_id: pedidoAceptado.id,
+    pedido_id: pedidoAceptado.id,
 
-                    repartidor: {
-                        lat: ubicacionRepartidor[1],
-                        lng: ubicacionRepartidor[0]
-                    },
+    tarifa: pedidoAceptado.tarifa,
 
-                    recogida: {
-                        lat: pedidoAceptado.recogidaLat,
-                        lng: pedidoAceptado.recogidaLng
-                    },
+    repartidor: {
+        lat: ubicacionRepartidor[1],
+        lng: ubicacionRepartidor[0]
+    },
 
-                    destino: {
-                        lat: pedidoAceptado.destinoLat,
-                        lng: pedidoAceptado.destinoLng
-                    }
-                })
+    recogida: {
+        lat: pedidoAceptado.recogidaLat,
+        lng: pedidoAceptado.recogidaLng
+    },
+
+    destino: {
+        lat: pedidoAceptado.destinoLat,
+        lng: pedidoAceptado.destinoLng
+    }
+})
             }
         );
 
@@ -1018,9 +1057,17 @@ async function aceptarPedido(pedidoAceptado) {
         pedidoAceptado.timer = null;
     }
 
-    pedidoAceptado.aceptado = true;
+   pedidoAceptado.aceptado = true;
 
-    if (pedidoAceptado.mensaje) {
+
+// =========================================================
+// MOSTRAR GANANCIA DEL PEDIDO ACEPTADO
+// =========================================================
+
+mostrarGanancia(pedidoAceptado);
+
+
+if (pedidoAceptado.mensaje) {
         pedidoAceptado.mensaje.remove();
         pedidoAceptado.mensaje = null;
     }

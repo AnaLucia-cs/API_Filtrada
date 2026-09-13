@@ -456,6 +456,15 @@ def aceptar_pedido():
     recogida = pedido["recogida"]
     destino = pedido["destino"]
 
+# Tarifa del pedido
+    tarifa = pedido.get("tarifa", 0.0)
+
+    try:
+        tarifa = float(tarifa)
+    except (TypeError, ValueError):
+        tarifa = 0.0
+    
+
     for nombre, ubicacion in (
         ("repartidor", repartidor),
         ("recogida", recogida),

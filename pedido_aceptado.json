@@ -1,8 +1,8 @@
 {
     "pedido_id": "ORD-23CECE",
     "repartidor": {
-        "lat": 25.707592,
-        "lng": -100.304799,
+        "lat": 25.696643,
+        "lng": -100.30919,
         "calle": "Calle no disponible"
     },
     "recogida": {

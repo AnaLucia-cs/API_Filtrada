@@ -401,3 +401,74 @@ body::after {
 
     z-index: -1;
 }
+
+
+/* ========================================
+   RECUADRO DE GANANCIAS
+   ======================================== */
+
+#recuadro-ganancias {
+
+    position: absolute;
+
+    top: 15px;
+    left: 15px;
+    right: 15px;
+
+    padding: 16px;
+
+    background: #ffffff;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.20);
+
+    z-index: 20;
+
+    text-align: center;
+
+}
+
+
+/* TÍTULO */
+
+#ganancias-titulo {
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    color: #333;
+
+    margin-bottom: 5px;
+
+}
+
+
+/* MONTO */
+
+#ganancias-monto {
+
+    font-size: 32px;
+
+    font-weight: bold;
+
+    color: #16a34a;
+
+    margin: 5px 0;
+
+}
+
+
+/* DETALLE */
+
+#ganancias-detalle {
+
+    font-size: 13px;
+
+    color: #666;
+
+    line-height: 1.4;
+
+}
