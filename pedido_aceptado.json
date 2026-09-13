@@ -1,18 +1,18 @@
 {
-    "pedido_id": 123,
+    "pedido_id": 456,
     "repartidor": {
-        "lat": 25.709107,
-        "lng": -100.316884,
-        "calle": "Manuel L. Barragán"
+        "lat": 25.703816,
+        "lng": -100.336997,
+        "calle": "Calle 18 de Marzo"
     },
     "recogida": {
-        "lat": 25.6866,
-        "lng": -100.3161,
-        "calle": "Colón"
+        "lat": 25.686,
+        "lng": -100.3157,
+        "calle": "Avenida Cristóbal Colón"
     },
     "destino": {
-        "lat": 25.7,
+        "lat": 25.73,
         "lng": -100.29,
-        "calle": "Calle Libertad"
+        "calle": "Avenida de la Juventud"
     }
 }

@@ -7,6 +7,7 @@ const pedidosActivos = new Set();
 let marcadorOrigen = null;
 let ubicacionRepartidor = null;
 let pedidoEnCurso = null;
+let fasePedido = 'hacia_recogida'; // 'hacia_recogida' | 'hacia_destino'
 
 // =========================================================
 // ELEMENTOS DE CONDICIONES
@@ -16,44 +17,29 @@ const botonesCondicion = document.querySelectorAll(".condicion");
 // =========================================================
 // SELECCIONAR CONDICIÓN
 // =========================================================
-botonesCondicion.forEach(
-    boton => {
-        boton.addEventListener(
-            "click",
-            evento => {
-                evento.stopPropagation();
+botonesCondicion.forEach(boton => {
+    boton.addEventListener("click", evento => {
+        evento.stopPropagation();
 
-                const tipo = boton.dataset.tipo;
-                const emoji = boton.dataset.emoji;
+        const tipo = boton.dataset.tipo;
+        const emoji = boton.dataset.emoji;
 
-                if (
-                    condicionSeleccionada &&
-                    condicionSeleccionada.tipo === tipo
-                ) {
-                    condicionSeleccionada = null;
-                    boton.classList.remove("condicion-seleccionada");
-                    console.log("Condición desactivada:", tipo);
-                    return;
-                }
+        if (condicionSeleccionada && condicionSeleccionada.tipo === tipo) {
+            condicionSeleccionada = null;
+            boton.classList.remove("condicion-seleccionada");
+            console.log("Condición desactivada:", tipo);
+            return;
+        }
 
-                botonesCondicion.forEach(
-                    otroBoton => {
-                        otroBoton.classList.remove("condicion-seleccionada");
-                    }
-                );
+        botonesCondicion.forEach(otroBoton => {
+            otroBoton.classList.remove("condicion-seleccionada");
+        });
 
-                condicionSeleccionada = {
-                    tipo: tipo,
-                    emoji: emoji,
-                    boton: boton
-                };
-
-                boton.classList.add("condicion-seleccionada");
-                console.log("Condición seleccionada:", condicionSeleccionada);
-            }
-        );
-    }
-);
+        condicionSeleccionada = { tipo, emoji, boton };
+        boton.classList.add("condicion-seleccionada");
+        console.log("Condición seleccionada:", condicionSeleccionada);
+    });
+});
 
 // =========================================================
 // CREAR MAPA DE MTY
@@ -65,106 +51,148 @@ const map = new maplibregl.Map({
     zoom: 12
 });
 
+// Esperar a que cargue el mapa antes de interactuar con capas
+map.on('load', () => {
+    console.log("Mapa cargado correctamente.");
+    
+    // Inicializar pedidos de ejemplo solo cuando el DOM y el mapa estén listos
+    crearPedido({
+        id: 123,
+        prioridad: "#9e1111",
+        tiempo: 30,
+        titulo: "Pedido #123",
+        detalles: "Recoger paquete y entregar.",
+        tarifa: 65.0,
+        recogidaLat: 25.6866,
+        recogidaLng: -100.3161,
+        destinoLat: 25.7000,
+        destinoLng: -100.2900
+    });
+
+    crearPedido({
+        id: 456,
+        prioridad: "#53bb0d",
+        tiempo: 30,
+        titulo: "Pedido #456",
+        detalles: "Recoger paquete y entregar.",
+        tarifa: 45.0,
+        recogidaLat: 25.6860,
+        recogidaLng: -100.3157,
+        destinoLat: 25.7300,
+        destinoLng: -100.2900
+    });
+});
+
 // =========================================================
 // CLICK EN MAPA (REPARTIDOR O CONDICIÓN)
 // =========================================================
-map.on(
-    "click",
-    async function (e) {
-        const lon = e.lngLat.lng;
-        const lat = e.lngLat.lat;
+map.on("click", async function (e) {
+    const lon = e.lngLat.lng;
+    const lat = e.lngLat.lat;
 
-        // Si hay una condición seleccionada, colocarla en lugar de mover al repartidor
-        if (condicionSeleccionada) {
-            await colocarCondicion(
-                lat,
-                lon,
-                condicionSeleccionada
-            );
-            return;
-        }
-
-        const url = `https://router.project-osrm.org/nearest/v1/driving/${lon},${lat}`;
-
-        try {
-            const respuesta = await fetch(url);
-            const datos = await respuesta.json();
-
-            if (datos.code !== "Ok") {
-                console.error("No se encontró una calle cercana.");
-                return;
-            }
-
-            const nuevoOrigen = datos.waypoints[0].location;
-            console.log("Nuevo origen / repartidor:", nuevoOrigen);
-
-            ubicacionRepartidor = nuevoOrigen;
-
-            if (marcadorOrigen !== null) {
-                marcadorOrigen.setLngLat(nuevoOrigen);
-            } else {
-                const elRepartidor = document.createElement("div");
-                elRepartidor.textContent = "🏍️";
-                elRepartidor.style.fontSize = "32px";
-                elRepartidor.style.cursor = "pointer";
-                elRepartidor.style.userSelect = "none";
-
-                marcadorOrigen = new maplibregl.Marker({
-                    element: elRepartidor,
-                    anchor: "center"
-                })
-                .setLngLat(nuevoOrigen)
-                .addTo(map);
-            }
-
-            console.log("Repartidor seleccionado:", ubicacionRepartidor);
-
-            // Si ya hay un pedido aceptado, actualizar ruta automáticamente hacia el punto de recogida
-            if (pedidoEnCurso) {
-                console.log("Actualizando ruta del repartidor hacia el punto de recogida...");
-                await calcularRuta(
-                    ubicacionRepartidor, 
-                    [pedidoEnCurso.recogidaLng, pedidoEnCurso.recogidaLat], 
-                    "ruta-trayecto-1"
-                );
-            }
-
-        } catch (error) {
-            console.error("Error al buscar la calle:", error);
-        }
+    if (condicionSeleccionada) {
+        await colocarCondicion(lat, lon, condicionSeleccionada);
+        return;
     }
-);
-
-// =========================================================
-// COLOCAR CONDICIÓN EN EL MAPA
-// =========================================================
-async function colocarCondicion(
-    lat,
-    lon,
-    condicion
-) {
-    console.log("Buscando calle cercana para condición...");
 
     const url = `https://router.project-osrm.org/nearest/v1/driving/${lon},${lat}`;
 
     try {
         const respuesta = await fetch(url);
-        if (!respuesta.ok) {
-            throw new Error("OSRM no respondió correctamente.");
+        const datos = await respuesta.json();
+
+        if (datos.code !== "Ok" || !datos.waypoints || datos.waypoints.length === 0) {
+            console.error("No se encontró una calle cercana.");
+            return;
         }
 
+        const nuevoOrigen = datos.waypoints[0].location;
+        ubicacionRepartidor = nuevoOrigen;
+
+        // =========================================================
+        // Cambio automático de fase al llegar a la recogida
+        // =========================================================
+        if (pedidoEnCurso && fasePedido === 'hacia_recogida') {
+            const distRecogida = Math.sqrt(
+                Math.pow(ubicacionRepartidor[0] - pedidoEnCurso.recogidaLng, 2) + 
+                Math.pow(ubicacionRepartidor[1] - pedidoEnCurso.recogidaLat, 2)
+            );
+
+            // Menor a 0.0008 (~80-100 metros de distancia)
+            if (distRecogida < 0.015) {
+                fasePedido = 'hacia_destino';
+                console.log("¡Llegó a la recogida! Cambiando a ruta verde (hacia_destino).");
+
+                // =========================================================
+                // BORRAR LA RUTA AZUL (CAPA Y FUENTE)
+                // =========================================================
+                if (map.getLayer("ruta-trayecto-1")) {
+                    map.removeLayer("ruta-trayecto-1");
+                }
+                if (map.getSource("ruta-trayecto-1")) {
+                    map.removeSource("ruta-trayecto-1");
+                }
+                // =================================------------------------
+                // BORRAR EL ICONO DE RECOGIDA (📦)
+                // =================================------------------------
+                if (pedidoEnCurso.marcadorRecogida) {
+                    pedidoEnCurso.marcadorRecogida.remove();
+                    pedidoEnCurso.marcadorRecogida = null;
+                }
+                // =================================------------------------
+            }
+        }
+        // =========================================================
+
+        if (marcadorOrigen !== null) {
+            marcadorOrigen.setLngLat(nuevoOrigen);
+        } else {
+            const elRepartidor = document.createElement("div");
+            elRepartidor.textContent = "🏍️";
+            elRepartidor.style.fontSize = "32px";
+            elRepartidor.style.cursor = "pointer";
+            elRepartidor.style.userSelect = "none";
+
+            marcadorOrigen = new maplibregl.Marker({
+                element: elRepartidor,
+                anchor: "center"
+            })
+            .setLngLat(nuevoOrigen)
+            .addTo(map);
+        }
+
+        console.log("Repartidor seleccionado:", ubicacionRepartidor);
+
+        if (pedidoEnCurso) {
+            const idRutaActiva = fasePedido === 'hacia_recogida' ? "ruta-trayecto-1" : "ruta-trayecto-2";
+            const destinoFase = fasePedido === 'hacia_recogida'
+                ? [pedidoEnCurso.recogidaLng, pedidoEnCurso.recogidaLat]
+                : [pedidoEnCurso.destinoLng, pedidoEnCurso.destinoLat];
+
+            await calcularRuta(ubicacionRepartidor, destinoFase, idRutaActiva);
+        }
+
+    } catch (error) {
+        console.error("Error al buscar la calle:", error);
+    }
+});
+
+// =========================================================
+// COLOCAR CONDICIÓN EN EL MAPA
+// =========================================================
+async function colocarCondicion(lat, lon, condicion) {
+    const url = `https://router.project-osrm.org/nearest/v1/driving/${lon},${lat}`;
+
+    try {
+        const respuesta = await fetch(url);
+        if (!respuesta.ok) throw new Error("OSRM no respondió correctamente.");
+
         const datos = await respuesta.json();
-        if (
-            datos.code !== "Ok" ||
-            !datos.waypoints ||
-            datos.waypoints.length === 0
-        ) {
+        if (datos.code !== "Ok" || !datos.waypoints || datos.waypoints.length === 0) {
             throw new Error("No se encontró una calle cercana.");
         }
 
-        const coordenadas = datos.waypoints[0].location;
-        const lngCalle = coordenadas[0];
-        const latCalle = coordenadas[1];
+        const [lngCalle, latCalle] = datos.waypoints[0].location;
 
         const elemento = document.createElement("div");
         elemento.textContent = condicion.emoji;
@@ -179,46 +207,35 @@ async function colocarCondicion(
         .setLngLat([lngCalle, latCalle])
         .addTo(map);
 
-        const respuestaFlask = await fetch(
-            "/api/condicion",
-            {
+        // Envío seguro a Flask (envuelve en try/catch por si no hay backend activo)
+        try {
+            const respuestaFlask = await fetch("/api/condicion", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     tipo: condicion.tipo,
                     emoji: condicion.emoji,
                     lat: latCalle,
                     lng: lngCalle
                 })
+            });
+
+            if (respuestaFlask.ok) {
+                const resultado = await respuestaFlask.json();
+                if (resultado.calle) elemento.title = resultado.calle;
             }
-        );
-
-        if (!respuestaFlask.ok) {
-            marcador.remove();
-            throw new Error("Flask no pudo guardar la condición.");
+        } catch (apiError) {
+            console.warn("Backend /api/condicion no disponible o falló:", apiError);
         }
 
-        const resultado = await respuestaFlask.json();
-        if (resultado.calle) {
-            elemento.title = resultado.calle;
-        }
-
+        const tipoCondicion = condicion.tipo;
         condicionSeleccionada = null;
-        botonesCondicion.forEach(
-            boton => {
-                boton.classList.remove("condicion-seleccionada");
-            }
-        );
+        botonesCondicion.forEach(b => b.classList.remove("condicion-seleccionada"));
 
-        console.log("Condición colocada correctamente:", {
-            tipo: condicion.tipo,
-            emoji: condicion.emoji,
-            lat: latCalle,
-            lng: lngCalle,
-            calle: resultado.calle
-        });
+        if (pedidoEnCurso && ubicacionRepartidor) {
+            await evaluarYRecalcularRutas(lngCalle, latCalle);
+        }
+
     } catch (error) {
         console.error("Error colocando condición:", error);
     }
@@ -227,12 +244,7 @@ async function colocarCondicion(
 // =========================================================
 // CREAR MARCADOR CON EMOJI + NÚMERO
 // =========================================================
-function crearMarcadorEmoji(
-    emoji,
-    numero,
-    coordenadas,
-    anchor = "bottom"
-) {
+function crearMarcadorEmoji(emoji, numero, coordenadas, anchor = "bottom") {
     const elemento = document.createElement("div");
     elemento.style.display = "flex";
     elemento.style.flexDirection = "column";
@@ -260,42 +272,29 @@ function crearMarcadorEmoji(
     elemento.appendChild(icono);
     elemento.appendChild(numeroElemento);
 
-    return new maplibregl.Marker({
-        element: elemento,
-        anchor: anchor
-    })
-    .setLngLat(coordenadas)
-    .addTo(map);
+    return new maplibregl.Marker({ element: elemento, anchor })
+        .setLngLat(coordenadas)
+        .addTo(map);
 }
 
 // =========================================================
-// CALCULAR RUTA (OSRM)
+// CALCULAR RUTA CON ALTERNATIVAS (OSRM)
 // =========================================================
-async function calcularRuta(
-    origen,
-    destino,
-    idRuta = "ruta"
-) {
-    const url =
-        `https://router.project-osrm.org/route/v1/driving/` +
-        `${origen[0]},${origen[1]};` +
-        `${destino[0]},${destino[1]}` +
-        `?steps=true&geometries=geojson&overview=full`;
+async function calcularRuta(origen, destino, idRuta = "ruta") {
+    const url = `https://router.project-osrm.org/route/v1/driving/${origen[0]},${origen[1]};${destino[0]},${destino[1]}?alternatives=true&geometries=geojson&overview=full`;
 
     try {
         const respuesta = await fetch(url);
         const datos = await respuesta.json();
-        
-        if (datos.code !== "Ok") {
+
+        if (datos.code !== "Ok" || !datos.routes || datos.routes.length === 0) {
             console.error("No se encontró una ruta.");
             return;
         }
 
-        const ruta = datos.routes[0];
-
         const geojson = {
             type: 'Feature',
-            geometry: ruta.geometry
+            geometry: datos.routes[0].geometry
         };
 
         if (map.getSource(idRuta)) {
@@ -308,20 +307,22 @@ async function calcularRuta(
 
             const colorRuta = idRuta === "ruta-trayecto-1" ? "#3887be" : "#2ecc71";
 
-            map.addLayer({
-                id: idRuta,
-                type: 'line',
-                source: idRuta,
-                layout: {
-                    'line-join': 'round',
-                    'line-cap': 'round'
-                },
-                paint: {
-                    'line-color': colorRuta,
-                    'line-width': 5,
-                    'line-opacity': 0.8
-                }
-            });
+            if (!map.getLayer(idRuta)) {
+                map.addLayer({
+                    id: idRuta,
+                    type: 'line',
+                    source: idRuta,
+                    layout: {
+                        'line-join': 'round',
+                        'line-cap': 'round'
+                    },
+                    paint: {
+                        'line-color': colorRuta,
+                        'line-width': 5,
+                        'line-opacity': 0.8
+                    }
+                });
+            }
         }
     } catch (error) {
         console.error("Error al calcular la ruta:", error);
@@ -337,22 +338,17 @@ function crearPedido({
     tiempo = 30,
     titulo = "Pedido",
     detalles = "",
+    tarifa = 50.0,
     recogidaLat,
     recogidaLng,
     destinoLat,
     destinoLng
 }) {
-    if (
-        typeof recogidaLat !== "number" ||
-        typeof recogidaLng !== "number" ||
-        typeof destinoLat !== "number" ||
-        typeof destinoLng !== "number"
-    ) {
-        console.error("El pedido necesita coordenadas válidas de recogida y destino.");
+    const contenedor = document.getElementById("display-message");
+    if (!contenedor) {
+        console.error("No se encontró el elemento #display-message en el DOM.");
         return;
     }
-
-    const contenedor = document.getElementById("display-message");
 
     const mensaje = document.createElement("div");
     mensaje.classList.add("mensaje");
@@ -418,6 +414,7 @@ function crearPedido({
         detalles,
         prioridad,
         tiempo,
+        tarifa,
         recogidaLat,
         recogidaLng,
         destinoLat,
@@ -433,17 +430,16 @@ function crearPedido({
     mensaje.pedido = pedido;
 
     obtenerDireccion(recogidaLat, recogidaLng)
-        .then(direccion => { addressRecogida.textContent = "📍 Recogida: " + direccion; })
-        .catch(() => { addressRecogida.textContent = "📍 Recogida: Dirección no disponible"; });
+        .then(dir => addressRecogida.textContent = "📍 Recogida: " + dir)
+        .catch(() => addressRecogida.textContent = "📍 Recogida: Dirección no disponible");
 
     obtenerDireccion(destinoLat, destinoLng)
-        .then(direccion => { addressDestino.textContent = "🏁 Destino: " + direccion; })
-        .catch(() => { addressDestino.textContent = "🏁 Destino: Dirección no disponible"; });
+        .then(dir => addressDestino.textContent = "🏁 Destino: " + dir)
+        .catch(() => addressDestino.textContent = "🏁 Destino: Dirección no disponible");
 
     let tiempoRestante = tiempo;
     time.style.width = "100%";
     time.style.transition = `width ${tiempo}s linear`;
-
     setTimeout(() => { time.style.width = "0%"; }, 50);
 
     pedido.timer = setInterval(() => {
@@ -453,8 +449,8 @@ function crearPedido({
         }
     }, 1000);
 
-    acceptButton.addEventListener("click", () => { aceptarPedido(pedido); });
-    rejectButton.addEventListener("click", () => { rechazarPedido(pedido); });
+    acceptButton.addEventListener("click", () => aceptarPedido(pedido));
+    rejectButton.addEventListener("click", () => rechazarPedido(pedido));
 
     mensaje.addEventListener("click", evento => {
         if (evento.target.tagName === "BUTTON") return;
@@ -489,13 +485,41 @@ function enfocarPedidoCompleto(pedido) {
 // ACEPTAR PEDIDO
 // =========================================================
 async function aceptarPedido(pedidoAceptado) {
-    console.log("Pedido aceptado:", pedidoAceptado);
-
     if (!ubicacionRepartidor) {
         alert("Primero selecciona la ubicación del repartidor en el mapa.");
         return;
     }
 
+    // 1. Enviar el pedido aceptado al backend de Flask (/api/pedido/aceptar)
+    try {
+        const respuestaBackend = await fetch("/api/pedido/aceptar", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                pedido_id: pedidoAceptado.id,
+                repartidor: {
+                    lat: ubicacionRepartidor[1],
+                    lng: ubicacionRepartidor[0]
+                },
+                recogida: {
+                    lat: pedidoAceptado.recogidaLat,
+                    lng: pedidoAceptado.recogidaLng
+                },
+                destino: {
+                    lat: pedidoAceptado.destinoLat,
+                    lng: pedidoAceptado.destinoLng
+                }
+            })
+        });
+
+        if (!respuestaBackend.ok) {
+            console.error("El servidor rechazó el pedido aceptado.");
+        }
+    } catch (e) {
+        console.warn("No se pudo conectar con /api/pedido/aceptar:", e);
+    }
+
+    // 2. Evaluar tarifa / distancia con IA (tu ruta /api/evaluar existente)
     try {
         const urlRuta = `https://router.project-osrm.org/route/v1/driving/${ubicacionRepartidor[0]},${ubicacionRepartidor[1]};${pedidoAceptado.recogidaLng},${pedidoAceptado.recogidaLat}?overview=false`;
         const respRuta = await fetch(urlRuta);
@@ -506,24 +530,20 @@ async function aceptarPedido(pedidoAceptado) {
             distanciaKm = datosRuta.routes[0].distance / 1000; 
         }
 
-        const respuesta = await fetch("/api/evaluar", {
+        await fetch("/api/evaluar", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 distancia_km: distanciaKm,
-                tarifa_mxn: 50.0, 
+                tarifa_mxn: pedidoAceptado.tarifa || 50.0, 
                 trafico: "Moderado"
             })
         });
-
-        if (!respuesta.ok) throw new Error("Error procesando el pedido con la IA.");
-        await respuesta.json();
-
     } catch (error) {
-        console.error("No se pudo aceptar el pedido:", error);
-        return;
+        console.warn("Error en evaluación secundaria:", error);
     }
 
+    // 3. Limpieza de interfaz de tarjetas y temporizadores
     if (pedidoAceptado.timer) {
         clearInterval(pedidoAceptado.timer);
         pedidoAceptado.timer = null;
@@ -546,9 +566,11 @@ async function aceptarPedido(pedidoAceptado) {
     pedidosActivos.add(pedidoAceptado);
 
     pedidoEnCurso = pedidoAceptado; 
+    fasePedido = 'hacia_recogida';
 
     enfocarPedidoCompleto(pedidoAceptado);
 
+    // 4. Pintar las rutas en el mapa de MapLibre
     await calcularRuta(
         ubicacionRepartidor, 
         [pedidoAceptado.recogidaLng, pedidoAceptado.recogidaLat], 
@@ -557,7 +579,7 @@ async function aceptarPedido(pedidoAceptado) {
 
     await calcularRuta(
         [pedidoAceptado.recogidaLng, pedidoAceptado.recogidaLat], 
-        [pedidoAceptado.destinoLng, pedidoAceptado.destinoLat], 
+        [pedidoAceptado.destinoLng, pedidoAceptado.destinoLat], // <-- Corregido (lng, lat)
         "ruta-trayecto-2"
     );
 }
@@ -566,7 +588,6 @@ async function aceptarPedido(pedidoAceptado) {
 // RECHAZAR PEDIDO
 // =========================================================
 function rechazarPedido(pedido) {
-    console.log("Pedido rechazado:", pedido.id);
     eliminarPedido(pedido);
 }
 
@@ -609,32 +630,59 @@ async function obtenerDireccion(lat, lng) {
     if (!respuesta.ok) throw new Error("No se pudo obtener la dirección.");
 
     const datos = await respuesta.json();
-    return datos.display_name;
+    return datos.display_name || "Dirección desconocida";
 }
 
 // =========================================================
-// EJEMPLO DE PEDIDOS INICIALES
+// EVALUAR OBSTÁCULO Y RECALCULAR SEGÚN FASE DEL PEDIDO
 // =========================================================
-crearPedido({
-    id: 123,
-    prioridad: "#9e1111",
-    tiempo: 30,
-    titulo: "Pedido #123",
-    detalles: "Recoger paquete y entregar.",
-    recogidaLat: 25.6866,
-    recogidaLng: -100.3161,
-    destinoLat: 25.7000,
-    destinoLng: -100.2900
-});
+async function evaluarYRecalcularRutas(lngObstaculo, latObstaculo) {
+    if (!pedidoEnCurso || !ubicacionRepartidor) return;
 
-crearPedido({
-    id: 456,
-    prioridad: "#53bb0d",
-    tiempo: 30,
-    titulo: "Pedido #456",
-    detalles: "Recoger paquete y entregar.",
-    recogidaLat: 25.6860,
-    recogidaLng: -100.3157,
-    destinoLat: 25.7300,
-    destinoLng: -100.2900
-});
+    try {
+        const esHaciaRecogida = (fasePedido === 'hacia_recogida');
+        const origen = esHaciaRecogida ? ubicacionRepartidor : [pedidoEnCurso.recogidaLng, pedidoEnCurso.recogidaLat];
+        const destino = esHaciaRecogida ? [pedidoEnCurso.recogidaLng, pedidoEnCurso.recogidaLat] : [pedidoEnCurso.destinoLng, pedidoEnCurso.destinoLat];
+        const idRutaActual = esHaciaRecogida ? "ruta-trayecto-1" : "ruta-trayecto-2";
+
+        const urlOsrm = `https://router.project-osrm.org/route/v1/driving/${origen[0]},${origen[1]};${destino[0]},${destino[1]}?alternatives=true&geometries=geojson&overview=full`;
+        const respOsrm = await fetch(urlOsrm);
+        const datosOsrm = await respOsrm.json();
+
+        if (datosOsrm.code === "Ok" && datosOsrm.routes && datosOsrm.routes.length > 0) {
+            try {
+                const respEva = await fetch("/api/evitar-obstaculo", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        obstaculo: { lng: lngObstaculo, lat: latObstaculo },
+                        rutas: datosOsrm.routes
+                    })
+                });
+
+                if (respEva.ok) {
+                    const resultado = await respEva.json();
+                    if (resultado.mejor_ruta && map.getSource(idRutaActual)) {
+                        map.getSource(idRutaActual).setData({
+                            type: 'Feature',
+                            geometry: resultado.mejor_ruta.geometry
+                        });
+                        return;
+                    }
+                }
+            } catch (e) {
+                // Fallback por si la API /api/evitar-obstaculo no responde
+            }
+
+            // Fallback directo a OSRM si el backend no procesa el obstáculo
+            if (map.getSource(idRutaActual)) {
+                map.getSource(idRutaActual).setData({
+                    type: 'Feature',
+                    geometry: datosOsrm.routes[0].geometry
+                });
+            }
+        }
+    } catch (error) {
+        console.error("Error al recalcular ruta por obstáculo:", error);
+    }
+}

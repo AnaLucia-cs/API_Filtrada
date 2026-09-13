@@ -4,6 +4,7 @@ import json
 import os
 import requests
 import threading
+import math
 from datetime import datetime
 from modules.explainer import analizar_y_explicar
 from modules.database import init_db, guardar_pedido
@@ -602,6 +603,43 @@ def obtener_pedido_aceptado():
             pedido_aceptado
     })
 
+def calcular_distancia_pto_a_linea(p_obs, p_ruta):
+    # Distancia euclidiana o Haversine rápida entre el obstáculo y los puntos de la ruta
+    # p_obs = [lng, lat], p_ruta = [lng, lat]
+    return math.sqrt((p_obs[0] - p_ruta[0])**2 + (p_obs[1] - p_ruta[1])**2)
+
+@app.route("/api/evitar-obstaculo", methods=["POST"])
+def evitar_obstaculo():
+    data = request.get_json()
+    obstaculo = data.get("obstaculo")
+    obs_coords = [obstaculo["lng"], obstaculo["lat"]]
+    rutas = data.get("rutas", [])
+
+    mejor_ruta = None
+    max_distancia_al_obs = -1
+    UMBRAL_PELIGRO = 0.002
+
+    for ruta in rutas:
+        puntos = ruta["geometry"]["coordinates"]
+        min_dist_a_obs = float("inf")
+
+        for p in puntos:
+            dist = calcular_distancia_pto_a_linea(obs_coords, p)
+            if dist < min_dist_a_obs:
+                min_dist_a_obs = dist
+        
+        # Preferimos la ruta que esté más lejos del obstáculo
+        if min_dist_a_obs > max_distancia_al_obs:
+            max_distancia_al_obs = min_dist_a_obs
+            mejor_ruta = ruta
+
+    if not mejor_ruta and rutas:
+        mejor_ruta = rutas[0]
+
+    return jsonify({
+        "status": "ok",
+        "mejor_ruta": mejor_ruta
+    })
 
 # =========================================================
 # INICIAR SERVIDOR
