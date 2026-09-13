@@ -1,7 +1,7 @@
 import random
 import uuid
-from modules.contract import TickResponse, AgentState, Coordinates, OrderContract
-from modules.database import insert_telemetry
+from contract import TickResponse, AgentState, Coordinates, OrderContract
+from database import insert_telemetry, guardar_orden
 
 class ShiftSimulator:
     def __init__(self):
@@ -65,7 +65,7 @@ def generate_batch_of_orders(num_orders=50):
         drop_lon = pick_lon + random.uniform(-0.02, 0.02)
         payout = round(20.0 + random.uniform(15.0, 60.0), 2)
         
-        orders.append(OrderContract(
+        nuevo_pedido = OrderContract(
             id=f"ORD-{uuid.uuid4().hex[:6].upper()}",
             pickup=Coordinates(lat=pick_lat, lon=pick_lon),
             dropoff=Coordinates(lat=drop_lat, lon=drop_lon),
@@ -73,5 +73,13 @@ def generate_batch_of_orders(num_orders=50):
             prep_time_minutes=random.randint(5, 15),
             time_limit_minutes=random.randint(30, 45),
             status="PENDING"
-        ))
+        )
+        
+        guardar_orden(nuevo_pedido)
+        orders.append(nuevo_pedido)
     return orders
+
+if __name__ == "__main__":
+    generate_batch_of_orders()
+
+generate_batch_of_orders()

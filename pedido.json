@@ -1,812 +1,164 @@
 [
     {
-        "id": 1789259919251,
-        "tipo": "choque",
-        "emoji": "🚨",
-        "lat": 25.696463,
-        "lng": -100.318382,
+        "id": 1789291232770,
+        "tipo": "obras",
+        "emoji": "🚧",
+        "lat": 25.664748,
+        "lng": -100.32669,
         "calle": "Calle no disponible",
-        "fecha": "2026-09-12T18:38:39.251126"
+        "fecha": "2026-09-13T03:20:32.770710"
     },
     {
-        "id": 1789259921195,
+        "id": 1789291653530,
         "tipo": "obras",
         "emoji": "🚧",
-        "lat": 25.698694,
-        "lng": -100.293153,
+        "lat": 25.706406,
+        "lng": -100.309412,
         "calle": "Calle no disponible",
-        "fecha": "2026-09-12T18:38:41.195104"
+        "fecha": "2026-09-13T03:27:33.530544"
     },
     {
-        "id": 1789259933264,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.676816,
-        "lng": -100.308138,
+        "id": 1789291658446,
+        "tipo": "choque",
+        "emoji": "🚨",
+        "lat": 25.711211,
+        "lng": -100.300717,
         "calle": "Calle no disponible",
-        "fecha": "2026-09-12T18:38:53.264824"
+        "fecha": "2026-09-13T03:27:38.446445"
     },
     {
-        "id": 1789259933429,
+        "id": 1789291662533,
         "tipo": "inundacion",
         "emoji": "🌊",
-        "lat": 25.676816,
-        "lng": -100.308138,
+        "lat": 25.711881,
+        "lng": -100.304368,
         "calle": "Calle no disponible",
-        "fecha": "2026-09-12T18:38:53.429689"
+        "fecha": "2026-09-13T03:27:42.533507"
     },
     {
-        "id": 1789259939458,
-        "tipo": "trafico",
-        "emoji": "🚗",
-        "lat": 25.701349,
-        "lng": -100.326002,
+        "id": 1789291670224,
+        "tipo": "inundacion",
+        "emoji": "🌊",
+        "lat": 25.703961,
+        "lng": -100.305414,
         "calle": "Calle no disponible",
-        "fecha": "2026-09-12T18:38:59.458518"
+        "fecha": "2026-09-13T03:27:50.224970"
     },
     {
-        "id": 1789264244643,
+        "id": 1789291678189,
         "tipo": "trafico",
         "emoji": "🚗",
-        "lat": 25.678839,
-        "lng": -100.306608,
+        "lat": 25.708738,
+        "lng": -100.308992,
         "calle": "Calle no disponible",
-        "fecha": "2026-09-12T19:50:44.643907"
+        "fecha": "2026-09-13T03:27:58.189909"
     },
     {
-        "id": 1789264252025,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.690412,
-        "lng": -100.294361,
+        "id": 1789291679716,
+        "tipo": "trafico",
+        "emoji": "🚗",
+        "lat": 25.705397,
+        "lng": -100.309539,
         "calle": "Calle no disponible",
-        "fecha": "2026-09-12T19:50:52.025537"
+        "fecha": "2026-09-13T03:27:59.716865"
     },
     {
-        "id": 1789264266868,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.691117,
-        "lng": -100.327707,
-        "calle": "Guadalupe Victoria",
-        "fecha": "2026-09-12T19:51:06.868044"
-    },
-    {
-        "id": 1789264281312,
+        "id": 1789291684048,
         "tipo": "inundacion",
         "emoji": "🌊",
-        "lat": 25.714211,
-        "lng": -100.311737,
+        "lat": 25.707779,
+        "lng": -100.309295,
         "calle": "Calle no disponible",
-        "fecha": "2026-09-12T19:51:21.312161"
+        "fecha": "2026-09-13T03:28:04.048420"
     },
     {
-        "id": 1789265970213,
+        "id": 1789291689378,
+        "tipo": "obras",
+        "emoji": "🚧",
+        "lat": 25.711377,
+        "lng": -100.299538,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T03:28:09.378642"
+    },
+    {
+        "id": 1789291716266,
+        "tipo": "obras",
+        "emoji": "🚧",
+        "lat": 25.678959,
+        "lng": -100.31891,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T03:28:36.266028"
+    },
+    {
+        "id": 1789291722137,
         "tipo": "inundacion",
         "emoji": "🌊",
-        "lat": 25.682418,
-        "lng": -100.307433,
-        "calle": "Calle José María Arteaga",
-        "fecha": "2026-09-12T20:19:30.213439"
+        "lat": 25.674143,
+        "lng": -100.319981,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T03:28:42.137267"
     },
     {
-        "id": 1789265974064,
+        "id": 1789291731232,
         "tipo": "inundacion",
         "emoji": "🌊",
-        "lat": 25.683771,
-        "lng": -100.324908,
-        "calle": "Calle Porfirio Díaz",
-        "fecha": "2026-09-12T20:19:34.064437"
+        "lat": 25.674461,
+        "lng": -100.314876,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T03:28:51.232358"
     },
     {
-        "id": 1789265980171,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.700081,
-        "lng": -100.287275,
-        "calle": "Calle Pablo A. de la Garza",
-        "fecha": "2026-09-12T20:19:40.171815"
-    },
-    {
-        "id": 1789265997537,
-        "tipo": "trafico",
-        "emoji": "🚗",
-        "lat": 25.701706,
-        "lng": -100.297912,
-        "calle": "Calle Nardo",
-        "fecha": "2026-09-12T20:19:57.537644"
-    },
-    {
-        "id": 1789266001503,
+        "id": 1789291737811,
         "tipo": "choque",
         "emoji": "🚨",
-        "lat": 25.701285,
-        "lng": -100.316925,
-        "calle": "Avenida Manuel Luis Barragán",
-        "fecha": "2026-09-12T20:20:01.503941"
+        "lat": 25.675974,
+        "lng": -100.314441,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T03:28:57.811012"
     },
     {
-        "id": 1789266007178,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.706763,
-        "lng": -100.299008,
-        "calle": "Calle Juan Sánchez Azcona",
-        "fecha": "2026-09-12T20:20:07.178550"
-    },
-    {
-        "id": 1789266383796,
+        "id": 1789291753471,
         "tipo": "choque",
         "emoji": "🚨",
-        "lat": 25.69771,
-        "lng": -100.328209,
-        "calle": "Avenida Venustiano Carranza",
-        "fecha": "2026-09-12T20:26:23.796357"
+        "lat": 25.677854,
+        "lng": -100.356753,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T03:29:13.471715"
     },
     {
-        "id": 1789266387991,
+        "id": 1789291755416,
         "tipo": "choque",
         "emoji": "🚨",
-        "lat": 25.696476,
-        "lng": -100.294964,
-        "calle": "Avenida Félix Uresti Gómez",
-        "fecha": "2026-09-12T20:26:27.991345"
+        "lat": 25.68677,
+        "lng": -100.342503,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T03:29:15.416329"
     },
     {
-        "id": 1789267323823,
-        "tipo": "choque",
-        "emoji": "🚨",
-        "lat": 25.703134,
-        "lng": -100.316261,
-        "calle": "Avenida Alfonso Reyes",
-        "fecha": "2026-09-12T20:42:03.823403"
-    },
-    {
-        "id": 1789267335138,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.702731,
-        "lng": -100.301485,
-        "calle": "Avenida José Ángel Conchello",
-        "fecha": "2026-09-12T20:42:15.138648"
-    },
-    {
-        "id": 1789267338036,
+        "id": 1789291766269,
         "tipo": "inundacion",
         "emoji": "🌊",
-        "lat": 25.695838,
-        "lng": -100.310767,
-        "calle": "Avenida Vicente Guerrero",
-        "fecha": "2026-09-12T20:42:18.036466"
+        "lat": 25.652601,
+        "lng": -100.363721,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T03:29:26.269978"
     },
     {
-        "id": 1789267344047,
-        "tipo": "trafico",
-        "emoji": "🚗",
-        "lat": 25.694238,
-        "lng": -100.287396,
-        "calle": "Calle Pablo A. de la Garza",
-        "fecha": "2026-09-12T20:42:24.047105"
-    },
-    {
-        "id": 1789280624664,
-        "tipo": "choque",
-        "emoji": "🚨",
-        "lat": 25.690441,
-        "lng": -100.304669,
-        "calle": "Calle Manuel Doblado",
-        "fecha": "2026-09-13T00:23:44.664026"
-    },
-    {
-        "id": 1789280787063,
-        "tipo": "choque",
-        "emoji": "🚨",
-        "lat": 25.690883,
-        "lng": -100.309236,
-        "calle": "Calle Emilio Carranza",
-        "fecha": "2026-09-13T00:26:27.063506"
-    },
-    {
-        "id": 1789280792794,
-        "tipo": "choque",
-        "emoji": "🚨",
-        "lat": 25.685275,
-        "lng": -100.314121,
-        "calle": "Calle Colegio Civil",
-        "fecha": "2026-09-13T00:26:32.794724"
-    },
-    {
-        "id": 1789280795952,
+        "id": 1789291773131,
         "tipo": "obras",
         "emoji": "🚧",
-        "lat": 25.689655,
-        "lng": -100.311363,
-        "calle": "Calzada Victoria",
-        "fecha": "2026-09-13T00:26:35.952072"
+        "lat": 25.645266,
+        "lng": -100.377339,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T03:29:33.131927"
     },
     {
-        "id": 1789280798528,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.689818,
-        "lng": -100.302618,
-        "calle": "Doctor José Maria Coss",
-        "fecha": "2026-09-13T00:26:38.528856"
-    },
-    {
-        "id": 1789280933622,
-        "tipo": "choque",
-        "emoji": "🚨",
-        "lat": 25.690441,
-        "lng": -100.304669,
-        "calle": "Calle Manuel Doblado",
-        "fecha": "2026-09-13T00:28:53.622706"
-    },
-    {
-        "id": 1789280939462,
+        "id": 1789291789419,
         "tipo": "obras",
         "emoji": "🚧",
-        "lat": 25.702903,
-        "lng": -100.298934,
-        "calle": "Avenida San Nicolás",
-        "fecha": "2026-09-13T00:28:59.462399"
-    },
-    {
-        "id": 1789280942308,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.69629,
-        "lng": -100.310712,
-        "calle": "Avenida Vicente Guerrero",
-        "fecha": "2026-09-13T00:29:02.308976"
-    },
-    {
-        "id": 1789280947637,
-        "tipo": "trafico",
-        "emoji": "🚗",
-        "lat": 25.702194,
-        "lng": -100.317362,
-        "calle": "Calle Licenciado Manuel de la Peña y Peña",
-        "fecha": "2026-09-13T00:29:07.637745"
-    },
-    {
-        "id": 1789281080946,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.690959,
-        "lng": -100.304171,
-        "calle": "Calle Progreso E",
-        "fecha": "2026-09-13T00:31:20.946211"
-    },
-    {
-        "id": 1789281090059,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.691149,
-        "lng": -100.311373,
-        "calle": "Avenida Vicente Guerrero",
-        "fecha": "2026-09-13T00:31:30.059185"
-    },
-    {
-        "id": 1789281292811,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.689673,
-        "lng": -100.307352,
-        "calle": "Calle Manuel Doblado",
-        "fecha": "2026-09-13T00:34:52.811150"
-    },
-    {
-        "id": 1789281300386,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.689935,
-        "lng": -100.302346,
-        "calle": "Calle Progreso E",
-        "fecha": "2026-09-13T00:35:00.386065"
-    },
-    {
-        "id": 1789281415647,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.695205,
-        "lng": -100.321705,
-        "calle": "Calle Julián Villagrán",
-        "fecha": "2026-09-13T00:36:55.647235"
-    },
-    {
-        "id": 1789281616513,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.695269,
-        "lng": -100.321248,
-        "calle": "Avenida José María Luis Mora",
-        "fecha": "2026-09-13T00:40:16.513497"
-    },
-    {
-        "id": 1789281624793,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.692421,
-        "lng": -100.316942,
-        "calle": "Avenida José María Luis Mora",
-        "fecha": "2026-09-13T00:40:24.793101"
-    },
-    {
-        "id": 1789281627211,
-        "tipo": "trafico",
-        "emoji": "🚗",
-        "lat": 25.69048,
-        "lng": -100.314975,
-        "calle": "Avenida José María Luis Mora",
-        "fecha": "2026-09-13T00:40:27.211424"
-    },
-    {
-        "id": 1789281770624,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.694181,
-        "lng": -100.321115,
-        "calle": "Privada Francisco Javier Echeverría",
-        "fecha": "2026-09-13T00:42:50.624934"
-    },
-    {
-        "id": 1789281800820,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.695054,
-        "lng": -100.320762,
-        "calle": "Avenida José María Luis Mora",
-        "fecha": "2026-09-13T00:43:20.820669"
-    },
-    {
-        "id": 1789281800826,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.695054,
-        "lng": -100.320762,
-        "calle": "Avenida José María Luis Mora",
-        "fecha": "2026-09-13T00:43:20.826337"
-    },
-    {
-        "id": 1789281800829,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.695054,
-        "lng": -100.320762,
-        "calle": "Avenida José María Luis Mora",
-        "fecha": "2026-09-13T00:43:20.829983"
-    },
-    {
-        "id": 1789282138947,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.696465,
-        "lng": -100.323524,
-        "calle": "Avenida General Pedro María Anaya",
-        "fecha": "2026-09-13T00:48:58.947143"
-    },
-    {
-        "id": 1789282163315,
-        "tipo": "trafico",
-        "emoji": "🚗",
-        "lat": 25.696461,
-        "lng": -100.319095,
-        "calle": "Avenida General Pedro María Anaya",
-        "fecha": "2026-09-13T00:49:23.315920"
-    },
-    {
-        "id": 1789282177857,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.698009,
-        "lng": -100.326524,
-        "calle": "Privada Miguel Nieto",
-        "fecha": "2026-09-13T00:49:37.857784"
-    },
-    {
-        "id": 1789282178473,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.698834,
-        "lng": -100.326641,
-        "calle": "Avenida José María Luis Mora",
-        "fecha": "2026-09-13T00:49:38.473806"
-    },
-    {
-        "id": 1789282339470,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.695865,
-        "lng": -100.316728,
-        "calle": "Avenida Alfonso Reyes",
-        "fecha": "2026-09-13T00:52:19.470869"
-    },
-    {
-        "id": 1789282595497,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.690128,
-        "lng": -100.314682,
-        "calle": "Avenida José María Luis Mora",
-        "fecha": "2026-09-13T00:56:35.497237"
-    },
-    {
-        "id": 1789282602773,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.698405,
-        "lng": -100.321686,
-        "calle": "Calle Julián Villagrán",
-        "fecha": "2026-09-13T00:56:42.773006"
-    },
-    {
-        "id": 1789282606138,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.6944,
-        "lng": -100.31994,
-        "calle": "Avenida José María Luis Mora",
-        "fecha": "2026-09-13T00:56:46.138162"
-    },
-    {
-        "id": 1789282651879,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.684224,
-        "lng": -100.316419,
-        "calle": "Calzada Francisco I. Madero",
-        "fecha": "2026-09-13T00:57:31.879043"
-    },
-    {
-        "id": 1789282659325,
-        "tipo": "choque",
-        "emoji": "🚨",
-        "lat": 25.684695,
-        "lng": -100.314204,
-        "calle": "Calle Colegio Civil",
-        "fecha": "2026-09-13T00:57:39.325519"
-    },
-    {
-        "id": 1789282707036,
-        "tipo": "choque",
-        "emoji": "🚨",
-        "lat": 25.684431,
-        "lng": -100.318705,
-        "calle": "Calzada Francisco I. Madero",
-        "fecha": "2026-09-13T00:58:27.036438"
-    },
-    {
-        "id": 1789283001359,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.684315,
-        "lng": -100.323872,
-        "calle": "Calle Serafín Peña",
-        "fecha": "2026-09-13T01:03:21.359855"
-    },
-    {
-        "id": 1789283009515,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.690102,
-        "lng": -100.321803,
-        "calle": "Calzada Guadalupe Victoria",
-        "fecha": "2026-09-13T01:03:29.515291"
-    },
-    {
-        "id": 1789283205249,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.684455,
-        "lng": -100.318877,
-        "calle": "Calzada Francisco I. Madero",
-        "fecha": "2026-09-13T01:06:45.249873"
-    },
-    {
-        "id": 1789283228137,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.68426,
-        "lng": -100.320285,
-        "calle": "Calle Amado Nervo",
-        "fecha": "2026-09-13T01:07:08.137086"
-    },
-    {
-        "id": 1789283234245,
-        "tipo": "trafico",
-        "emoji": "🚗",
-        "lat": 25.684088,
-        "lng": -100.3141,
-        "calle": "Calzada Francisco I. Madero",
-        "fecha": "2026-09-13T01:07:14.245269"
-    },
-    {
-        "id": 1789283248399,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.684755,
-        "lng": -100.32431,
-        "calle": "Privada P. Florida",
-        "fecha": "2026-09-13T01:07:28.399420"
-    },
-    {
-        "id": 1789283253456,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.706411,
-        "lng": -100.313713,
-        "calle": "Calle José Mariano Salas",
-        "fecha": "2026-09-13T01:07:33.456347"
-    },
-    {
-        "id": 1789283269906,
-        "tipo": "trafico",
-        "emoji": "🚗",
-        "lat": 25.697468,
-        "lng": -100.318395,
-        "calle": "Calle Lucas Alamán",
-        "fecha": "2026-09-13T01:07:49.906426"
-    },
-    {
-        "id": 1789283283890,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.694682,
-        "lng": -100.320199,
-        "calle": "Avenida José María Luis Mora",
-        "fecha": "2026-09-13T01:08:03.890596"
-    },
-    {
-        "id": 1789283474506,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.695417,
-        "lng": -100.32171,
-        "calle": "Calle Julián Villagrán",
-        "fecha": "2026-09-13T01:11:14.506684"
-    },
-    {
-        "id": 1789283482784,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.710523,
-        "lng": -100.312249,
-        "calle": "Avenida Don Luis Garza Sada",
-        "fecha": "2026-09-13T01:11:22.784567"
-    },
-    {
-        "id": 1789283496210,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.701301,
-        "lng": -100.316461,
-        "calle": "Avenida Alfonso Reyes",
-        "fecha": "2026-09-13T01:11:36.210992"
-    },
-    {
-        "id": 1789283559522,
-        "tipo": "trafico",
-        "emoji": "🚗",
-        "lat": 25.68526,
-        "lng": -100.323015,
-        "calle": "Avenida General Bernardo Reyes",
-        "fecha": "2026-09-13T01:12:39.522050"
-    },
-    {
-        "id": 1789283572568,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.695622,
-        "lng": -100.321715,
-        "calle": "Calle Julián Villagrán",
-        "fecha": "2026-09-13T01:12:52.568003"
-    },
-    {
-        "id": 1789283590758,
-        "tipo": "choque",
-        "emoji": "🚨",
-        "lat": 25.690845,
-        "lng": -100.31141,
-        "calle": "Avenida Vicente Guerrero",
-        "fecha": "2026-09-13T01:13:10.758712"
-    },
-    {
-        "id": 1789283679053,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.694911,
-        "lng": -100.32096,
-        "calle": "José Joaquín de Herrera",
-        "fecha": "2026-09-13T01:14:39.053685"
-    },
-    {
-        "id": 1789283694997,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.696773,
-        "lng": -100.316925,
-        "calle": "Avenida Alfonso Reyes",
-        "fecha": "2026-09-13T01:14:54.997872"
-    },
-    {
-        "id": 1789283700466,
-        "tipo": "choque",
-        "emoji": "🚨",
-        "lat": 25.693766,
-        "lng": -100.316717,
-        "calle": "Avenida Alfonso Reyes",
-        "fecha": "2026-09-13T01:15:00.466220"
-    },
-    {
-        "id": 1789283774578,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.694842,
-        "lng": -100.320441,
-        "calle": "Avenida José María Luis Mora",
-        "fecha": "2026-09-13T01:16:14.578664"
-    },
-    {
-        "id": 1789283784918,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.700058,
-        "lng": -100.316361,
-        "calle": "Calle Heroico Colegio Militar",
-        "fecha": "2026-09-13T01:16:24.918187"
-    },
-    {
-        "id": 1789283790672,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.695218,
-        "lng": -100.316723,
-        "calle": "Avenida Alfonso Reyes",
-        "fecha": "2026-09-13T01:16:30.672171"
-    },
-    {
-        "id": 1789283816933,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.693619,
-        "lng": -100.316848,
-        "calle": "Avenida Alfonso Reyes",
-        "fecha": "2026-09-13T01:16:56.933027"
-    },
-    {
-        "id": 1789283824888,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.711446,
-        "lng": -100.312751,
-        "calle": "Avenida Alfonso Reyes",
-        "fecha": "2026-09-13T01:17:04.888885"
-    },
-    {
-        "id": 1789283897681,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.699075,
-        "lng": -100.327863,
-        "calle": "Avenida Venustiano Carranza",
-        "fecha": "2026-09-13T01:18:17.681473"
-    },
-    {
-        "id": 1789283905688,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.718691,
-        "lng": -100.310094,
-        "calle": "Avenida Ciudad de Los Ángeles",
-        "fecha": "2026-09-13T01:18:25.688925"
-    },
-    {
-        "id": 1789283909995,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.693899,
-        "lng": -100.316718,
-        "calle": "Avenida Alfonso Reyes",
-        "fecha": "2026-09-13T01:18:29.995717"
-    },
-    {
-        "id": 1789283921465,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.696445,
-        "lng": -100.323046,
-        "calle": "Avenida José María Luis Mora",
-        "fecha": "2026-09-13T01:18:41.465162"
-    },
-    {
-        "id": 1789283930500,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.696394,
-        "lng": -100.316733,
-        "calle": "Avenida Alfonso Reyes",
-        "fecha": "2026-09-13T01:18:50.500730"
-    },
-    {
-        "id": 1789283935710,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.719633,
-        "lng": -100.309837,
-        "calle": "Avenida Alfonso Reyes",
-        "fecha": "2026-09-13T01:18:55.710782"
-    },
-    {
-        "id": 1789283974327,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.696273,
-        "lng": -100.324836,
-        "calle": "Avenida General Bernardo Reyes",
-        "fecha": "2026-09-13T01:19:34.327679"
-    },
-    {
-        "id": 1789283985584,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.700515,
-        "lng": -100.329637,
-        "calle": "Calle José Manuel Herrera",
-        "fecha": "2026-09-13T01:19:45.584235"
-    },
-    {
-        "id": 1789283997328,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.699736,
-        "lng": -100.328565,
-        "calle": "Calle Martín de Zavala",
-        "fecha": "2026-09-13T01:19:57.328797"
-    },
-    {
-        "id": 1789284009741,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.697386,
-        "lng": -100.324682,
-        "calle": "Calle Lucas Alamán",
-        "fecha": "2026-09-13T01:20:09.741210"
-    },
-    {
-        "id": 1789284030171,
-        "tipo": "choque",
-        "emoji": "🚨",
-        "lat": 25.704577,
-        "lng": -100.314885,
-        "calle": "Avenida Adolfo Ruíz Cortines",
-        "fecha": "2026-09-13T01:20:30.171373"
-    },
-    {
-        "id": 1789284223758,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.696254,
-        "lng": -100.322571,
-        "calle": "Avenida José María Luis Mora",
-        "fecha": "2026-09-13T01:23:43.758109"
-    },
-    {
-        "id": 1789284238898,
-        "tipo": "obras",
-        "emoji": "🚧",
-        "lat": 25.710283,
-        "lng": -100.312984,
-        "calle": "Avenida Alfonso Reyes",
-        "fecha": "2026-09-13T01:23:58.898285"
-    },
-    {
-        "id": 1789284277370,
-        "tipo": "inundacion",
-        "emoji": "🌊",
-        "lat": 25.710019,
-        "lng": -100.296294,
-        "calle": "Avenida San Nicolás",
-        "fecha": "2026-09-13T01:24:37.370282"
+        "lat": 25.648462,
+        "lng": -100.376231,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T03:29:49.419695"
     }
 ]

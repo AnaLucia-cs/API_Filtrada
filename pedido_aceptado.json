@@ -1,18 +1,18 @@
 {
-    "pedido_id": 456,
+    "pedido_id": "ORD-23CECE",
     "repartidor": {
-        "lat": 25.703816,
-        "lng": -100.336997,
-        "calle": "Calle 18 de Marzo"
+        "lat": 25.707592,
+        "lng": -100.304799,
+        "calle": "Calle no disponible"
     },
     "recogida": {
-        "lat": 25.686,
-        "lng": -100.3157,
-        "calle": "Avenida Cristóbal Colón"
+        "lat": 25.64207457771722,
+        "lng": -100.37965398949864,
+        "calle": "Calle no disponible"
     },
     "destino": {
-        "lat": 25.73,
-        "lng": -100.29,
-        "calle": "Avenida de la Juventud"
+        "lat": 25.645022994979765,
+        "lng": -100.37250781529588,
+        "calle": "Calle no disponible"
     }
 }
