@@ -353,6 +353,31 @@ def obtener_condiciones():
         "condiciones":
             condiciones
     })
+
+# =========================================================
+# EVALUAR PEDIDO CON IA (Función recuperada)
+# =========================================================
+@app.post("/api/evaluar")
+def evaluar_pedido():
+    datos = request.get_json(silent=True)
+    if not datos:
+        return jsonify({"ok": False, "error": "Se requiere un JSON válido."}), 400
+
+    distancia_km = datos.get("distancia_km", 0.0)
+    tarifa_mxn = datos.get("tarifa_mxn", 0.0)
+    trafico = datos.get("trafico", "Normal")
+
+    # Lógica de evaluación o simulación de respuesta de Gemini / IA
+    evaluacion = {
+        "ok": True,
+        "recomendacion": "Aceptar",
+        "motivo": f"La distancia es de {distancia_km} km con una tarifa de ${tarifa_mxn} MXN y tráfico {trafico}.",
+        "distancia_km": distancia_km,
+        "tarifa_mxn": tarifa_mxn
+    }
+
+    return jsonify(evaluacion)
+
 # =========================================================
 # ACEPTAR PEDIDO
 # =========================================================
