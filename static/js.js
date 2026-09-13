@@ -1078,6 +1078,8 @@ if (pedidoAceptado.mensaje) {
     pedidoEnCurso = pedidoAceptado;
     fasePedido = "hacia_recogida";
 
+    mostrarBotonTerminarPedido();
+
     enfocarPedidoCompleto(pedidoAceptado);
 
     await calcularRuta(
@@ -1378,4 +1380,176 @@ async function evaluarYRecalcularRutas(
             error
         );
     }
+}
+
+// =========================================================
+// MOSTRAR BOTÓN DE TERMINAR PEDIDO
+// =========================================================
+
+function mostrarBotonTerminarPedido() {
+
+    const contenedor = document.getElementById(
+        "contenedor-terminar-pedido"
+    );
+
+    if (!contenedor) {
+        return;
+    }
+
+    contenedor.style.display = "block";
+
+}
+
+
+// =========================================================
+// OCULTAR BOTÓN DE TERMINAR PEDIDO
+// =========================================================
+
+function ocultarBotonTerminarPedido() {
+
+    const contenedor = document.getElementById(
+        "contenedor-terminar-pedido"
+    );
+
+    if (!contenedor) {
+        return;
+    }
+
+    contenedor.style.display = "none";
+
+}
+
+// =========================================================
+// TERMINAR PEDIDO Y BUSCAR MÁS
+// =========================================================
+
+async function terminarPedido() {
+
+    if (!pedidoEnCurso) {
+
+        return;
+    }
+
+    console.log(
+        "Pedido terminado:",
+        pedidoEnCurso.id
+    );
+
+
+    // -----------------------------------------
+    // 1. Ocultar botón
+    // -----------------------------------------
+
+    ocultarBotonTerminarPedido();
+
+
+    // -----------------------------------------
+    // 2. Limpiar rutas
+    // -----------------------------------------
+
+    const rutas = [
+        "ruta-trayecto-1",
+        "ruta-trayecto-2"
+    ];
+
+    rutas.forEach(idRuta => {
+
+        if (map.getLayer(idRuta)) {
+
+            map.removeLayer(idRuta);
+
+        }
+
+        if (map.getSource(idRuta)) {
+
+            map.removeSource(idRuta);
+
+        }
+
+    });
+
+
+    // -----------------------------------------
+    // 3. Limpiar pedido actual
+    // -----------------------------------------
+
+    if (pedidoEnCurso.marcadorRecogida) {
+
+        pedidoEnCurso.marcadorRecogida.remove();
+
+    }
+
+    if (pedidoEnCurso.marcadorDestino) {
+
+        pedidoEnCurso.marcadorDestino.remove();
+
+    }
+
+    pedidoEnCurso = null;
+
+    fasePedido = "hacia_recogida";
+
+
+    // -----------------------------------------
+    // 4. Permitir cargar nuevos pedidos
+    // -----------------------------------------
+
+    pedidosCargados = false;
+
+
+    // -----------------------------------------
+    // 5. Cargar más pedidos
+    // -----------------------------------------
+
+    await cargarNuevosPedidos();
+
+}
+
+// =========================================================
+// CARGAR NUEVOS PEDIDOS
+// =========================================================
+
+async function cargarNuevosPedidos() {
+
+    if (!ubicacionRepartidor) {
+
+        console.warn(
+            "No se pueden cargar pedidos sin conductor."
+        );
+
+        return;
+    }
+
+
+    // Permitir nueva carga
+
+    pedidosCargados = false;
+
+
+    // Limpiar pedidos anteriores
+
+    limpiarPedidos();
+
+
+    // Cargar pedidos desde Flask
+
+    await cargarPedidosEnMapa();
+
+}
+
+// =========================================================
+// EVENTO DEL BOTÓN TERMINAR
+// =========================================================
+
+const botonTerminarPedido = document.getElementById(
+    "boton-terminar-pedido"
+);
+
+if (botonTerminarPedido) {
+
+    botonTerminarPedido.addEventListener(
+        "click",
+        terminarPedido
+    );
+
 }

@@ -1,18 +1,19 @@
 {
-    "pedido_id": "ORD-23CECE",
+    "pedido_id": "ORD-2AD0D4",
+    "tarifa": 75.89,
     "repartidor": {
-        "lat": 25.696643,
-        "lng": -100.30919,
-        "calle": "Calle no disponible"
+        "lat": 25.6774,
+        "lng": -100.295739,
+        "calle": "Vicente Suárez"
     },
     "recogida": {
-        "lat": 25.64207457771722,
-        "lng": -100.37965398949864,
-        "calle": "Calle no disponible"
+        "lat": 25.66995630267626,
+        "lng": -100.29229753759095,
+        "calle": "Avenida Doctor Ignacio Morones Prieto"
     },
     "destino": {
-        "lat": 25.645022994979765,
-        "lng": -100.37250781529588,
-        "calle": "Calle no disponible"
+        "lat": 25.660660325430708,
+        "lng": -100.27808815384002,
+        "calle": "Mar del Plata"
     }
 }

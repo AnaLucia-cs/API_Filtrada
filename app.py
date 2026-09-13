@@ -480,9 +480,11 @@ def aceptar_pedido():
             }), 400
 
     pedido_nuevo = {
-        "pedido_id": pedido_id,
+    "pedido_id": pedido_id,
 
-        "repartidor": {
+    "tarifa": tarifa,
+
+    "repartidor": {
             "lat": repartidor["lat"],
             "lng": repartidor["lng"],
             "calle": repartidor.get(

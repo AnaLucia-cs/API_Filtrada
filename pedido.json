@@ -178,5 +178,59 @@
         "lng": -100.326476,
         "calle": "Calle no disponible",
         "fecha": "2026-09-13T04:47:32.763912"
+    },
+    {
+        "id": 1789297779457,
+        "tipo": "obras",
+        "emoji": "🚧",
+        "lat": 25.686741,
+        "lng": -100.332739,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T05:09:39.457810"
+    },
+    {
+        "id": 1789299680578,
+        "tipo": "inundacion",
+        "emoji": "🌊",
+        "lat": 25.691667,
+        "lng": -100.316403,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T05:41:20.578633"
+    },
+    {
+        "id": 1789299712738,
+        "tipo": "obras",
+        "emoji": "🚧",
+        "lat": 25.682611,
+        "lng": -100.318309,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T05:41:52.738327"
+    },
+    {
+        "id": 1789300034168,
+        "tipo": "obras",
+        "emoji": "🚧",
+        "lat": 25.703641,
+        "lng": -100.324962,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T05:47:14.168632"
+    },
+    {
+        "id": 1789300038795,
+        "tipo": "obras",
+        "emoji": "🚧",
+        "lat": 25.707284,
+        "lng": -100.323915,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T05:47:18.795572"
+    },
+    {
+        "id": 1789300040619,
+        "tipo": "obras",
+        "emoji": "🚧",
+        "lat": 25.711491,
+        "lng": -100.325786,
+        "calle": "Calle no disponible",
+        "fecha": "2026-09-13T05:47:20.619207"
     }
 ]
